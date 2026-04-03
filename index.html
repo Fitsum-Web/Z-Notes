@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Notes | መነሻ ገጽ</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f4f7f6;
+        }
+
+        nav {
+            background: white;
+            padding: 10px 20px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+        }
+
+        .clean-logo {
+            height: 60px;
+            width: auto;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1a2a6c;
+            letter-spacing: 1px;
+            font-family: 'Arial Black', sans-serif;
+        }
+
+        nav ul { 
+            list-style: none; 
+            display: flex; 
+            margin: 0; 
+            padding: 0; 
+            align-items: center;
+        }
+        
+        nav ul li { margin-left: 25px; }
+        nav ul li a { text-decoration: none; color: #333; font-weight: 500; transition: 0.3s; }
+        nav ul li a:hover { color: #28a745; }
+
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(26, 42, 108, 0.8), rgba(40, 167, 69, 0.8)), 
+                        url('https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 { font-size: 50px; margin-bottom: 20px; }
+        .hero p { font-size: 20px; max-width: 600px; margin-bottom: 30px; }
+
+        .cta-btn {
+            background: #28a745;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            animation: moveBtn 0.6s infinite alternate;
+            background: #218838;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        @keyframes moveBtn {
+            from { transform: translateY(0); }
+            to { transform: translateY(-8px); }
+        }
+
+        .features {
+            padding: 80px 50px;
+            text-align: center;
+            background: #fdfdfd;
+        }
+
+        .features h2 { color: #1a2a6c; font-size: 32px; margin-bottom: 40px; }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .feature-item:hover { transform: translateY(-5px); }
+
+        .feature-icon { font-size: 40px; margin-bottom: 15px; display: block; }
+        .feature-item h3 { color: #28a745; margin-bottom: 10px; }
+        .feature-item p { color: #666; font-size: 15px; line-height: 1.5; }
+
+        footer {
+            background: #1a2a6c;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 580px) {
+            .hero h1 { font-size: 35px; }
+            nav { padding: 10px 15px; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="dashboard.html" class="logo-link">
+            <img src="Logo2.png" alt="Z-Notes Logo" class="clean-logo">
+            <span class="logo-text">Z-NOTES</span>
+        </a>
+        
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html" style="background: #1a2a6c; color: white; padding: 8px 22px; border-radius: 20px;">Login</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <h1>የትምህርት ማስታወሻዎች በአንድ ቦታ!</h1>
+        <p>ከ 9ኛ - 12ኛ ክፍል ያሉ ማንኛቸውም የትምህርት ማስታወሻዎችን፣ ያለፉ ፈተናዎችን እና መወያያዎችን እዚህ በቀላሉ ያገኛሉ።</p>
+        <a href="signup.html" class="cta-btn">አሁኑኑ ይጀምሩ</a>
+    </section>
+
+    <section class="features">
+        <h2>ለምን Z-Notes?</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <span class="feature-icon">📚</span>
+                <h3>ጥራት ያላቸው ማስታወሻዎች</h3>
+                <p>በመምህራን የተዘጋጁ እና ለመረዳት ቀላል የሆኑ አጫጭር ማስታወሻዎች።</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📝</span>
+                <h3>ያለፉ ፈተናዎች</h3>
+                <p>የብሔራዊ ፈተናዎችን ከነመልሳቸው በመለማመድ ለፈተና ዝግጁ ይሁኑ።</p>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">👥</span>
+                <h3>የመወያያ መድረክ</h3>
+                <p>ከሌሎች ተማሪዎች ጋር ሃሳብ በመለዋወጥ እውቀትዎን ያሳድጉ።</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Z-Notes | የእውቀት ማዕከል።</p>
+    </footer>
+
+</body>
+</html>

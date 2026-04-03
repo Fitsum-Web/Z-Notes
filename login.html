@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Notes | Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #dfecf3, #e8f5e9);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 380px;
+            text-align: center;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+            text-decoration: none;
+        }
+
+        .logo-box {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            margin-right: 12px;
+            font-size: 28px;
+            font-weight: 900;
+            transform: rotate(-10deg);
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a2a6c;
+        }
+
+        h2 { color: #1a2a6c; margin-bottom: 20px; font-size: 22px; }
+
+        .input-group {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-sizing: border-box;
+            background: #f9f9f9;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #28a745;
+            outline: none;
+            background: white;
+        }
+
+        .toggle-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            user-select: none;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: #28a745;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 5px;
+        }
+
+        .login-btn:hover {
+            animation: shake 0.5s infinite;
+            background: #218838;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            75% { transform: translateX(3px); }
+        }
+
+        .extra-links {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .extra-links a {
+            color: #28a745;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-home {
+            display: block;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <div class="logo-wrapper">
+            <div class="logo-box">Z</div>
+            <div class="logo-text">Z-NOTES</div>
+        </div>
+        
+        <h2>እንኳን ደህና መጡ</h2>
+        
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <input type="email" id="email" placeholder="ኢሜይል (Gmail)" required>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" placeholder="የይለፍ ቃል (Password)" required>
+                <span class="toggle-btn" id="eyeIcon">👁️</span>
+            </div>
+
+            <button type="submit" class="login-btn">ግባ</button>
+        </form>
+
+        <div class="extra-links">
+            አካውንት የለዎትም? <a href="signup.html">ይመዝገቡ</a>
+        </div>
+        
+        <a href="index.html" class="back-home">← ወደ መነሻ ገጽ ተመለስ</a>
+    </div>
+
+    <script>
+        const eyeIcon = document.getElementById('eyeIcon');
+        const passwordInput = document.getElementById('password');
+
+        eyeIcon.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const emailInput = document.getElementById('email').value.trim().toLowerCase();
+            const passwordInputVal = document.getElementById('password').value;
+
+            const savedEmail = localStorage.getItem("email");
+            const savedPassword = localStorage.getItem("password");
+            const name = localStorage.getItem("studentName") || "ተማሪ";
+
+            if (!savedEmail) {
+                alert("ምንም አይነት አካውንት አልተገኘም! እባክዎ መጀመሪያ ይመዝገቡ።");
+                window.location.href = "signup.html";
+                return;
+            }
+
+            if (emailInput === savedEmail && passwordInputVal === savedPassword) {
+                alert("እንኳን ደህና መጡ " + name + "!");
+                localStorage.setItem("isLoggedIn", "true");
+                window.location.href = "dashboard.html";
+            } else {
+                alert("ኢሜይል ወይም ፓስወርድ ስህተት ነው! እባክዎ እንደገና ይሞክሩ።");
+            }
+        }
+    </script>
+</body>
+</html>

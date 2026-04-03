@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Notes | Community Hub</title>
+    <style>
+        :root {
+            --primary-green: #28a745;
+            --dark-blue: #1a2a6c;
+            --tg-blue: #0088cc;
+            --bg-light: #f4f7f6;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            overflow: hidden;
+        }
+
+        .split-container {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* --- ግራ ክፍል (Fixed Sidebar) --- */
+        .left-side {
+            flex: 1;
+            /* ወደ አረንጓዴ የተቀየረ ባክግራውንድ */
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-blue));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        .main-logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 25px;
+            /* ሎጎውን ነጭ ለማድረግ */
+            filter: brightness(0) invert(1) drop-shadow(0 10px 20px rgba(0,0,0,0.2));
+            animation: logo-float 3s ease-in-out infinite;
+            transition: 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        /* ሎጎው ላይ ሲያርፉ 360 ዲግሪ እንዲዞር */
+        .main-logo:hover {
+            transform: rotateY(360deg);
+        }
+
+        @keyframes logo-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .left-side h1 { font-size: 2.8rem; margin: 0; font-weight: 800; letter-spacing: 1px; }
+        .left-side p { font-size: 1.1rem; opacity: 0.9; max-width: 350px; line-height: 1.6; margin-top: 15px; }
+
+        .info-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 25px;
+            border-radius: 50px;
+            margin-top: 30px;
+            font-size: 13px;
+            border: 1px dashed rgba(255,255,255,0.4);
+            backdrop-filter: blur(8px);
+        }
+
+        /* --- ቀኝ ክፍል (Scrollable) --- */
+        .right-side {
+            flex: 1.6;
+            background-color: var(--bg-light);
+            overflow-y: auto;
+            padding: 50px 30px;
+            scroll-behavior: smooth;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        /* ካርድ ዲዛይን */
+        .group-card {
+            background: white;
+            border-radius: 25px;
+            padding: 35px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            transition: all 0.4s ease;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .group-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: var(--primary-green);
+        }
+
+        /* 360 Degree Spinning Icon */
+        .icon-circle {
+            width: 85px;
+            height: 85px;
+            margin-bottom: 20px;
+            background: #f0fdf4;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: var(--primary-green);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .group-card:hover .icon-circle {
+            transform: rotate(360deg);
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .group-card h3 { font-size: 22px; margin: 5px 0; color: var(--dark-blue); }
+        .group-card p { font-size: 14px; color: #666; margin-bottom: 20px; }
+
+        .btn {
+            background: #f1f5f9;
+            color: var(--tg-blue);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 12px;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .group-card:hover .btn {
+            background: var(--tg-blue);
+            color: white;
+            border-color: var(--tg-blue);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .split-container { flex-direction: column; overflow-y: auto; height: auto; }
+            .left-side { height: auto; padding: 60px 20px; }
+            .right-side { height: auto; overflow: visible; padding: 30px 20px; }
+            body { overflow: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="split-container">
+    <div class="left-side">
+        <img src="Logo2.png" alt="Z-Notes Logo" class="main-logo">
+        <h1>Z-Notes Hub</h1>
+        <p>የቴሌግራም መወያያ ግሩፖችን በመቀላቀል ከጓደኞችዎ ጋር ይማሩ።</p>
+        <div class="info-badge">
+            📢 ቴሌግራም መጫንዎን ያረጋግጡ
+        </div>
+    </div>
+
+    <div class="right-side">
+        <div class="grid">
+            
+            <a href="https://t.me/G9_Chat" class="group-card">
+                <div class="icon-circle">📖</div>
+                <h3>9ኛ ክፍል</h3>
+                <p>General Subjects Discussion</p>
+                <div class="btn">JOIN NOW</div>
+            </a>
+
+            <a href="https://t.me/G10_Chat" class="group-card">
+                <div class="icon-circle">🖋️</div>
+                <h3>10ኛ ክፍል</h3>
+                <p>General Subjects Discussion</p>
+                <div class="btn">JOIN NOW</div>
+            </a>
+			
+            <a href="https://t.me/G11_Natural" class="group-card">
+                <div class="icon-circle">🔬</div>
+                <h3>11ኛ Natural</h3>
+                <p>General Subjects Discussion</p>
+                <div class="btn">JOIN NOW</div>
+            </a>
+
+            <a href="https://t.me/G11_Social" class="group-card">
+                <div class="icon-circle">⚖️</div>
+                <h3>11ኛ Social</h3>
+                <p>General Subjects Discussion</p>
+                <div class="btn">JOIN NOW</div>
+            </a>
+
+            <a href="https://t.me/G12_Natural" class="group-card">
+                <div class="icon-circle">⚛️</div>
+                <h3>12ኛ Natural</h3>
+                <p>General Subjects Discussion</p>
+                <div class="btn">JOIN NOW</div>
+            </a>
+
+            <a href="https://t.me/G12_Social" class="group-card">
+                <div class="icon-circle">📜</div>
+                <h3>12ኛ Social</h3>
+                <p>General Subjects Discussion</p>
+                <div class="btn">JOIN NOW</div>
+            </a>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

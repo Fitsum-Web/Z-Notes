@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Notes | መመዝገቢያ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #dfecf3, #e8f5e9);
+            min-height: 100vh; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        .signup-card {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-box {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: white;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            margin-right: 12px;
+            font-size: 30px;
+            font-weight: 900;
+            transform: rotate(-10deg);
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
+        }
+
+        .logo-text {
+            font-size: 30px;
+            font-weight: 800;
+            color: #1a2a6c;
+        }
+
+        h2 { color: #1a2a6c; margin-bottom: 5px; font-size: 24px; }
+        p { color: #666; margin-bottom: 25px; font-size: 14px; }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        label { display: block; margin-bottom: 5px; color: #1a2a6c; font-weight: 600; }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-sizing: border-box;
+            background: #fdfdfd;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        input:focus {
+            border-color: #28a745;
+            outline: none;
+            box-shadow: 0 0 8px rgba(40,167,69,0.1);
+        }
+
+        .toggle-btn {
+            position: absolute;
+            right: 12px;
+            top: 38px;
+            cursor: pointer;
+            font-size: 18px;
+            user-select: none;
+        }
+
+        .signup-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #28a745, #218838);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(40,167,69,0.3);
+            transition: 0.3s;
+        }
+
+        .signup-btn:hover {
+            animation: wiggle 0.5s ease infinite;
+            background: #218838;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-1deg); }
+            50% { transform: rotate(1deg); }
+            75% { transform: rotate(-1deg); }
+        }
+
+        .footer-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .footer-text a {
+            color: #28a745;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #888;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-card">
+        <div class="logo-wrapper">
+            <div class="logo-box">Z</div>
+            <div class="logo-text">Z-NOTES</div>
+        </div>
+        
+        <h2>አዲስ አካውንት ይክፈቱ</h2>
+        <p>የ Z-Notes ቤተሰብ ለመሆን ፎርሙን ይሙሉ</p>
+        
+        <form onsubmit="handleSignup(event)">
+            <div class="input-group">
+                <label>First Name</label>
+                <input type="text" id="firstName" placeholder="First Name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Last Name</label>
+                <input type="text" id="lastName" placeholder="Last Name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Gmail</label>
+                <input type="email" id="email" placeholder="example@gmail.com" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="********" required>
+                <span class="toggle-btn" id="eyeIcon">👁️</span>
+            </div>
+
+            <button type="submit" class="signup-btn">አሁኑኑ ተመዝገብ</button>
+        </form>
+
+        <div class="footer-text">
+            ቀድሞ አካውንት አለዎት? <a href="login.html">ይግቡ (Login)</a>
+        </div>
+        
+        <a href="index.html" class="back-link">← ወደ መነሻ ገጽ ተመለስ</a>
+    </div>
+
+    <script>
+    const eyeIcon = document.getElementById('eyeIcon');
+    const passwordInput = document.getElementById('password');
+
+    eyeIcon.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.textContent = type === 'password' ? '👁️' : '🙈';
+    });
+
+    function handleSignup(event) {
+        event.preventDefault();
+
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName = document.getElementById('lastName').value.trim();
+        const email = document.getElementById('email').value.trim().toLowerCase();
+        const password = document.getElementById('password').value;
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("እባክዎ ትክክለኛ የጂሜይል አድራሻ ያስገቡ!");
+            return;
+        }
+
+        if (password.length < 6) {
+            alert("ፓስወርድ ቢያንስ 6 ፊደላት ወይም ቁጥሮች መሆን አለበት!");
+            return;
+        }
+
+        localStorage.setItem("studentName", firstName);
+        localStorage.setItem("email", email);
+        localStorage.setItem("password", password);
+        localStorage.setItem("isLoggedIn", "true");
+        
+        localStorage.setItem("signupDate", new Date().getTime());
+
+        alert("ምዝገባው ተሳክቷል! እንኳን ደህና መጡ " + firstName + "!");
+        window.location.href = "dashboard.html";
+    }
+    </script>
+</body>
+</html>
