@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Notes | 11ኛ ክፍል ዘርፍ ምርጫ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        nav {
+            background: white;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 12px; 
+}
+
+.clean-logo {
+    height: 60px; 
+    width: auto;
+    display: block;
+    transition: 0.3s;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a2a6c;
+    letter-spacing: 1px;
+    font-family: 'Arial Black', sans-serif;
+}
+        #nav-timer-sync {
+            color: #ff4757;
+            font-weight: bold;
+            background: #fff5f5;
+            padding: 6px 15px;
+            border-radius: 20px;
+            border: 1px solid #ffdada;
+            font-family: monospace;
+            display: none;
+        }
+
+        #profileMenu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            min-width: 180px;
+            color: #333;
+        }
+        .logout-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 8px;
+            background: #dc3545;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        header {
+            background: linear-gradient(45deg, #1a2a6c, #28a745);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+			border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+        .container {
+            flex: 1;
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        .stream-grid {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            align-items: stretch;
+        }
+        .stream-card {
+            flex: 1; 
+            background: white;
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #1a2a6c;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border-top: 8px solid #28a745;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .stream-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .stream-icon {
+            font-size: 55px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            width: 90px;
+            height: 90px;
+            line-height: 90px;
+            border-radius: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .stream-card h2 { margin: 15px 0; font-size: 24px; }
+        .stream-card p { color: #666; font-size: 14.5px; line-height: 1.6; margin-bottom: 25px; }
+        .btn-select {
+            background: #1a2a6c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .stream-card:hover .btn-select { background: #28a745; }
+
+        body.dark-mode { background-color: #121212; color: white; }
+        body.dark-mode nav, body.dark-mode .stream-card, body.dark-mode #profileMenu { background-color: #1e1e1e; border-color: #333; }
+        body.dark-mode .stream-card h2, body.dark-mode #profileMenu { color: white; }
+        body.dark-mode .stream-card p { color: #bbb; }
+
+        @media (max-width: 768px) {
+            .stream-grid { flex-direction: column; }
+        }
+        footer { background: #1a2a6c; color: white; text-align: center; padding: 25px; margin-top: auto; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="dashboard.html" class="logo-link">
+        <img src="Logo2.png" alt="Z-Notes Logo" class="clean-logo">
+        <span class="logo-text">Z-NOTES</span>
+    </a>
+        <div style="display: flex; align-items: center; gap: 15px;">
+		<div style="position: relative;">
+                <button onclick="toggleProfileMenu(event)" style="background:none; border:none; cursor:pointer; font-size:24px; color:inherit;">👤</button>
+                <div id="profileMenu">
+                    <p id="profileName" style="margin: 0; font-weight: bold; border-bottom: 1px solid #eee; padding-bottom: 8px;">ተማሪ</p>
+                    <p onclick="toggleDarkMode()" style="cursor: pointer; padding: 10px 0; margin:0;">🌙/☀️ Dark Mode</p>
+                    <a href="index.html" onclick="localStorage.clear()" class="logout-btn">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+    <a href="dashboard.html" class="back-link">⬅️ ወደ ዳሽቦርድ ተመለስ</a>
+        <h1>የ 11ኛ ክፍል ዘርፍ ምርጫ</h1>
+        <p>የጥናት ዘርፍዎን ይምረጡ</p>
+    </header>
+
+    <div class="container">
+        <div class="stream-grid">                        
+            <a href="natural11.html" class="stream-card" style="border-top-color: #1a2a6c;">
+                <div>
+                    <div class="stream-icon">🔬</div>
+                    <h2>Natural Science</h2>
+                    <p>Physics, Chemistry, Biology እና Maths የሚካተቱበት የሳይንስ ዘርፍ።</p>
+                </div>
+                <div class="btn-select">ይግቡ</div>
+            </a>
+            <a href="social11.html" class="stream-card" style="border-top-color: #1a2a6c;">
+                <div>
+                    <div class="stream-icon">🌍</div>
+                    <h2>Social Science</h2>
+                    <p>Geography, History, Economics እና ሌሎች የማህበራዊ ሳይንስ ትምህርቶች።</p>
+                </div>
+                <div class="btn-select">ይግቡ</div>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Z-Notes | እውቀት ብርሃን ነው!</p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            // ስም መጫን
+            const name = localStorage.getItem('studentName');
+            if (name) document.getElementById('profileName').textContent = name;
+            
+            if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+            syncTimer();
+        };
+
+        function toggleDarkMode() {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        function toggleProfileMenu(e) {
+            e.stopPropagation();
+            let m = document.getElementById('profileMenu');
+            m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+        }
+
+        window.onclick = function(e) {
+            if (!e.target.closest('#profileMenu') && !e.target.matches('button')) {
+                document.getElementById('profileMenu').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

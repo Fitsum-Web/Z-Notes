@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Notes | ስለ እኛ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(45deg, #dfecf3, #e8f5e9);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        /* ሄደር */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-header h1 {
+            color: #1a2a6c;
+            font-size: 42px;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .underline {
+            width: 80px;
+            height: 4px;
+            background: #28a745;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+
+        .container {
+            max-width: 900px;
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .logo-circle {
+            width: 150px;
+            height: 150px;
+            background: #f0f4f8;
+            border-radius: 50%;
+            margin: -100px auto 30px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 8px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            font-size: 50px;
+        }
+
+        .about-text {
+            color: #444;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: #fcfdfe;
+            padding: 25px;
+            border-radius: 20px;
+            border: 1px solid #eef2f7;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-color: #28a745;
+        }
+
+        .card h3 {
+            color: #1a2a6c;
+            margin-bottom: 10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            text-decoration: none;
+            background: #1a2a6c;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #28a745;
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <h1>ABOUT US</h1>
+        <div class="underline"></div>
+    </div>
+
+    <div class="container">
+        <div class="logo-circle">🎓</div>
+        
+        <div class="about-text">
+            <h2>እንኳን ወደ Z-Notes በደህና መጡ</h2>
+            <p>
+                Z-Notes የተመሰረተው ተማሪዎች የትምህርት ማስታወሻዎችን በቀላሉ እንዲያገኙና 
+                እርስ በእርሳቸው መረጃ እንዲለዋወጡ ለማገዝ ነው። የእኛ ዓላማ ቴክኖሎጂን በመጠቀም 
+                ትምህርትን ለሁሉም ተደራሽ እና ቀላል ማድረግ ነው።
+            </p>
+        </div>
+
+        <div class="mission-grid">
+            <div class="card">
+                <h3>ራዕይ (Vision)</h3>
+                <p>በኢትዮጵያ ውስጥ ተመራጭ የትምህርት መርጃ ዌብሳይት መሆን።</p>
+            </div>
+            <div class="card">
+                <h3>ተልዕኮ (Mission)</h3>
+                <p>ጥራት ያላቸው ማስታወሻዎችን ለተማሪዎች በነጻ ማቅረብ።</p>
+            </div>
+            <div class="card">
+                <h3>እሴቶች (Values)</h3>
+                <p>ታማኝነት፣ ጥራት እና ለተማሪዎች ቅድሚያ መስጠት።</p>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-btn">ወደ ዋናው ገጽ ተመለስ</a>
+    </div>
+<footer style="background: #1a2a6c; color: white; text-align: center; padding: 30px; margin-top: 50px;">
+    <p style="margin: 0;">© 2026 Z-Notes | እውቀት ብርሃን ነው!</p>
+</footer>
+</body>
+</html>
+

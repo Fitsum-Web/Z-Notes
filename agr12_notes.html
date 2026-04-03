@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Z-Notes | Study Hub</title>
+<style>
+:root {
+      --deep-green: #064e3b; 
+      --fresh-green: #059669;
+      --soft-blue: #1e3a8a; 
+}
+
+body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: radial-gradient(at top left, #065f46, transparent),
+      radial-gradient(at bottom right, #1e3a8a, transparent),
+      radial-gradient(at bottom left, #059669, transparent);
+      background-color: #064e3b; 
+      background-attachment: fixed;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: white;
+}
+
+header {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.logo-area { 
+      display: flex; 
+      align-items: center; 
+	  gap: 10px; 
+	  }
+.logo-area img { 
+      height: 45px; 
+	  filter: brightness(0) invert(1); 
+	  }
+.logo-area span { 
+      font-weight: 900;  
+	  font-size: 24px; 
+	  letter-spacing: 1px; 
+	  }
+
+.nav-info { 
+      display: flex; 
+      gap: 10px; 
+	  }
+.info-chip {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 5px 15px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: bold;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.units-nav {
+      padding: 20px 40px;
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      align-items: stretch;
+}
+
+.unit-tab {
+      min-width: 180px;
+      background: rgba(255, 255, 255, 0.08); 
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 15px 20px;
+      border-radius: 16px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: 600;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      color: rgba(255, 255, 255, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      line-height: 1.4;
+      font-size: 14px;
+}
+
+.unit-tab:hover {
+      background: var(--fresh-green); 
+      color: white;
+      transform: translateY(-5px) scale(1.02); 
+      border-color: #34d399;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); 
+}
+
+.unit-tab.active {
+      background: white;
+      color: var(--deep-green);
+      border-color: white;
+      box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+      font-weight: 800;
+}
+.content-area {
+      flex: 1;
+      padding: 0 40px 30px;
+      display: flex;
+      justify-content: center;
+}
+
+.viewer-card {
+      width: 100%;
+      max-width: 1200px;
+      background: white; 
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      position: relative;
+}
+
+#pdf-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+}
+
+.intro {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #ccc;
+      text-align: center;
+}
+
+.btn-back {
+      text-decoration: none;
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 14px;
+      transition: 0.3s;
+}
+.btn-back:hover { 
+      background: rgba(255, 255, 255, 0.3); 
+	  }
+
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo-area">
+        <img src="Logo2.png" alt="Z-Notes">
+      <span>Z-NOTES</span>
+</div>
+
+<div class="nav-info">
+   <span class="info-chip">Grade 12</span>
+   <span class="info-chip" style="background: #34d399; color: #064e3b;">Amharic</span>
+   <span class="info-chip">Notes</span>
+</div>
+
+<a href="javascript:history.back()" class="btn-back">Back</a>
+</header>
+
+<div class="units-nav">
+     <div class="unit-tab" onclick="showPDF('notes/agr1.pdf', this)">Unit 1</div>
+     <div class="unit-tab" onclick="showPDF('notes/agr2.pdf', this)">Unit 2</div>
+     <div class="unit-tab" onclick="showPDF('notes/agr3.pdf', this)">Unit 3</div>
+     <div class="unit-tab" onclick="showPDF('notes/agr4.pdf', this)">Unit 4</div>
+     <div class="unit-tab" onclick="showPDF('notes/agr5.pdf', this)">Unit 5</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 6</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 7</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 8</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 9</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 10</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 11</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 12</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 13</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 14</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 15</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 16</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 17</div>
+     <div class="unit-tab" onclick="showPDF('notes/ang5.pdf', this)">Unit 18</div>
+</div>
+
+<main class="content-area">
+     <div class="viewer-card">
+     <div id="intro-screen" class="intro">
+<h1 style="font-size: 80px; margin: 0; opacity: 0.2;">📗</h1>
+<h2 style="color: #064e3b;">ለመጀመር ዩኒት ይምረጡ</h2>
+<p style="color: #666;">የመረጡት ማስታወሻ እዚህ ጋር በንጽህና ይከፈታል።</p>
+</div>
+<iframe id="pdf-frame" src=""></iframe>
+</div>
+</main>
+
+<script>
+function showPDF(url, el) {
+const frame = document.getElementById('pdf-frame');
+const intro = document.getElementById('intro-screen');
+
+frame.src = url;
+frame.style.display = 'block';
+intro.style.display = 'none';
+
+document.querySelectorAll('.unit-tab').forEach(t => t.classList.remove('active'));
+el.classList.add('active');
+}
+</script>
+
+</body>
+</html>

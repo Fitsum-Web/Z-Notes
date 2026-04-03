@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Notes | 9ኛ ክፍል</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        nav {
+            background: white;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 12px; 
+}
+
+.clean-logo {
+    height: 60px;
+    width: auto;
+    display: block;
+    transition: 0.3s;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a2a6c;
+    letter-spacing: 1px;
+    font-family: 'Arial Black', sans-serif;
+}
+
+        #profileMenu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            min-width: 150px;
+            color: #333;
+            top: 100%;
+        }
+
+        .logout-btn {
+            display: block;
+            margin-top: 10px;
+            padding: 8px;
+            background: #dc3545;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #eee;
+        }
+
+        body.dark-mode nav, body.dark-mode #profileMenu {
+            background-color: #1e1e1e !important;
+            color: white !important;
+        }
+
+        body.dark-mode .subject-card {
+            background-color: #1e1e1e;
+            color: white;
+            border-left-color: #28a745;
+        }
+
+        header {
+            background: linear-gradient(45deg, #1a2a6c, #28a745);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+			border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+            min-height: 60vh;
+        }
+
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #1a2a6c;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border-left: 6px solid #28a745;
+            cursor: pointer;
+        }
+
+        .subject-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            background: #f9fff9;
+        }
+
+        .subject-icon {
+            font-size: 30px;
+            margin-right: 15px;
+            background: #f0f2f5;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .subject-info h3 { margin: 0; font-size: 18px; }
+        .subject-info p { margin: 5px 0 0; font-size: 13px; color: #28a745; font-weight: bold; }
+
+        footer {
+            background: #1a2a6c;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="dashboard.html" class="logo-link">
+        <img src="Logo2.png" alt="Z-Notes Logo" class="clean-logo">
+        <span class="logo-text">Z-NOTES</span>
+    </a>
+        <div class="profile-container" style="position: relative;">
+            <button onclick="toggleProfileMenu(event)" style="background: none; border: none; cursor: pointer; font-size: 24px; color: inherit;">
+                👤
+            </button>
+            
+            <div id="profileMenu">
+                    <p id="profileName" style="margin: 0; font-weight: bold; border-bottom: 1px solid #eee; padding-bottom: 8px;">ተማሪ</p>
+                    <p onclick="toggleDarkMode()" style="cursor: pointer; padding: 10px 0; margin:0;">🌙/☀️ Dark Mode</p>
+                    <a href="index.html" onclick="localStorage.clear()" class="logout-btn">Logout</a>
+                </div>
+        </div>
+    </nav>
+
+    <header>
+        <a href="dashboard.html" class="back-link">⬅️ ወደ ዳሽቦርድ ተመለስ</a>
+        <h1>የ 9ኛ ክፍል ትምህርቶች</h1>
+        <p>ለጥናትህ የሚረዱ ማስታወሻዎችን እና ፈተናዎችን ከታች መምረጥ ትችላለህ።</p>
+    </header>
+
+    <div class="container">
+        <div class="subject-grid">
+            
+            <a href="Maths9.html" class="subject-card">
+                <div class="subject-icon">📐</div>
+                <div class="subject-info">
+                    <h3>ሒሳብ (Maths)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+            <a href="Biology9.html" class="subject-card">
+                <div class="subject-icon">🧬</div>
+                <div class="subject-info">
+                    <h3>ባዮሎጂ (Biology)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+            <a href="Chemistry9.html" class="subject-card">
+                <div class="subject-icon">🧪</div>
+                <div class="subject-info">
+                    <h3>ኬሚስትሪ (Chemistry)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+            <a href="Physics9.html" class="subject-card">
+                <div class="subject-icon">⚙️</div>
+                <div class="subject-info">
+                    <h3>ፊዚክስ (Physics)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+            <a href="English9.html" class="subject-card">
+                <div class="subject-icon">📖</div>
+                <div class="subject-info">
+                    <h3>እንግሊዝኛ (English)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+            <a href="Amharic9.html" class="subject-card">
+                <div class="subject-icon">✍️</div>
+                <div class="subject-info">
+                    <h3>አማርኛ (Amharic)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+            <a href="Citizenship9.html" class="subject-card">
+                <div class="subject-icon">⚖️</div>
+                <div class="subject-info">
+                    <h3>ዜግነት (Citizenship)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+            <a href="Geography9.html" class="subject-card">
+                <div class="subject-icon">🌍</div>
+                <div class="subject-info">
+                    <h3>ጂኦግራፊ (Geography)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+            <a href="History9.html" class="subject-card">
+                <div class="subject-icon">🏺</div>
+                <div class="subject-info">
+                    <h3>ታሪክ (History)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+            <a href="IT9.html" class="subject-card">
+                <div class="subject-icon">💻</div>
+                <div class="subject-info">
+                    <h3>አይቲ (IT)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+            <a href="Economics9.html" class="subject-card">
+                <div class="subject-icon">📊</div>
+                <div class="subject-info">
+                    <h3>ኢኮኖሚክስ (Economics)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+            <a href="HPE9.html" class="subject-card">
+                <div class="subject-icon">🏃</div>
+                <div class="subject-info">
+                    <h3>ሰውነት ማጎልመሻ (HPE)</h3>
+                    <p>Notes & Exam</p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <footer>
+        <p style="margin: 0;">© 2026 Z-Notes | እውቀት ብርሃን ነው!</p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            const name = localStorage.getItem('studentName');
+            if (name) document.getElementById('profileName').textContent = name;
+            
+            if (localStorage.getItem('theme') === 'dark') {
+                document.body.classList.add('dark-mode');
+            }
+        };
+
+        function toggleProfileMenu(event) {
+            event.stopPropagation();
+            let menu = document.getElementById('profileMenu');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function toggleDarkMode() {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('.profile-container')) {
+                document.getElementById('profileMenu').style.display = 'none';
+            }
+        };
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+<html lang="am">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Notes | Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        nav {
+            background: white;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+      .logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 12px; 
+}
+
+.clean-logo {
+    height: 60px; 
+    width: auto;
+    display: block;
+    transition: 0.3s;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 800;
+    color: #1a2a6c;
+    letter-spacing: 1px;
+    font-family: 'Arial Black', sans-serif;
+}
+        .nav-clock {
+            background: #f0f2f5;
+            padding: 5px 15px;
+            border-radius: 500px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a2a6c;
+            border: 1px solid #ddd;
+            display: flex;
+            gap: 15px;
+        }
+        #nav-time { color: #28a745; font-family: monospace; font-size: 15px; }
+        .logout-btn {
+    display: block;
+    margin-top: 10px;
+    padding: 8px;
+    background: #dc3545;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 8px;
+}
+        .dashboard-header {
+            background: linear-gradient(45deg, #1a2a6c, #28a745);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+        .dashboard-header h1 { font-size: 32px; margin-bottom: 5px; }
+        .container {
+            max-width: 1100px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+        }
+        .grades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .grade-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+        .grade-card:hover {
+            transform: translateY(-8px);
+            border-color: #28a745;
+        }
+        .grade-card h3 { font-size: 20px; color: #1a2a6c; margin-bottom: 5px; }
+                .start-btn {
+            margin-top: 10px;
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        .dashboard-extra {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .motivation-card {
+            background: linear-gradient(135deg, #1a2a6c, #2a4858);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .study-meter {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            border-left: 5px solid #28a745;
+        }
+        #study-timer {
+            font-size: 35px;
+            font-weight: bold;
+            color: #1a2a6c;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        .timer-btn {
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 0 5px;
+        }
+        .days-count {
+            background: #f0fff4;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 10px auto;
+            border: 3px solid #28a745;
+        }
+        #days-number { font-size: 24px; font-weight: bold; color: #28a745; }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        .stat-item {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+            border-top: 4px solid #28a745;
+        }
+        .stat-num { font-size: 22px; font-weight: bold; color: #1a2a6c; display: block; }
+        @media (max-width: 400px) {
+            .nav-clock { display: none; }
+            nav { padding: 10px 15px; }
+        }
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode .grade-card, 
+body.dark-mode nav, 
+body.dark-mode .study-meter, 
+body.dark-mode .stat-item {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid #333;
+}
+body.dark-mode .grade-card h3 { color: #28a745 !important; }
+body {
+    background-color: white;
+    color: black;
+    transition: 0.3s;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: white; 
+}
+#profileMenu {
+    background-color: var(--menu-bg, white);
+    color: var(--menu-text, black);
+}
+
+body.dark-mode {
+    --menu-bg: #333;
+    --menu-text: white;
+}
+div.dark-mode #profileMenu {
+    --menu-bg, black;
+    --menu-text, white;
+    </style>
+</head>
+<body>
+    <nav>
+            <a href="dashboard.html" class="logo-link">
+        <img src="Logo2.png" alt="Z-Notes Logo" class="clean-logo">
+        <span class="logo-text">Z-NOTES</span>
+    </a>
+        <div class="nav-clock">
+            <span id="nav-date">ቀን...</span>
+            <span id="nav-time">00:00:00</span>
+        </div>
+        <div class="profile-container" style="position: relative;">
+    <button onclick="toggleProfileMenu(event)" style="background: none; border: none; cursor: pointer; font-size: 24px; color: inherit;">
+    👤
+</button>
+    
+    <div id="profileMenu" style="display: none; position: absolute; right: 0; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 1000; min-width: 150px; color: #333;">
+        <p style="margin: 0; font-weight: bold;" id="profileName">ተማሪ</p>
+        <hr>
+                     <p onclick="toggleDarkMode()" style="cursor: pointer; padding-top: 10px 0; margin: 0px">🌙/☀️ Dark Mode</p>
+        <a href="index.html" onclick="handleLogout()" class="logout-btn">Logout</a>
+    </div>
+</div>
+    </nav>
+    <div class="dashboard-header">
+        <h1 id="welcomeText">ሰላም! 👋</h1>
+        <p>የዛሬው ጥናትህ ከየት ይጀምራል?</p>
+    </div>
+    <div class="container">
+        <div class="grades-grid">
+            <a href="grade9.html" class="grade-card">
+                <h3>9ኛ ክፍል</h3>
+                <p>ሁሉም ትምህርቶች</p>
+                <div class="start-btn">ክፈት</div>
+            </a>
+            <a href="grade10.html" class="grade-card">
+                <h3>10ኛ ክፍል</h3>
+                <p>ሁሉም ትምህርቶች</p>
+                <div class="start-btn">ክፈት</div>
+            </a>
+            <a href="grade11.html" class="grade-card">
+                <h3>11ኛ ክፍል</h3>
+                <p>Natural & Social</p>
+                <div class="start-btn">ክፈት</div>
+            </a>
+            <a href="grade12.html" class="grade-card">
+                <h3>12ኛ ክፍል</h3>
+                <p>Natural & Social</p>
+                <div class="start-btn">ክፈት</div>
+            </a>
+        </div>
+    </div>
+    <div class="dashboard-extra">
+        <div class="study-meter">
+            <h3 style="margin:0; color:#1a2a6c;">የጥናት ታይመር ⏱️</h3>
+            
+            <div style="margin: 15px 0;">
+                <input type="number" id="setMinutes" placeholder="ደቂቃ" min="1" 
+                       style="padding: 8px; border-radius: 8px; border: 1px solid #ddd; width: 80px; text-align: center; outline: none;">
+                <button onclick="setCountdown()" style="background: #1a2a6c; color: white; border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold;">አላርም ሙላ</button>
+            </div>
+
+           <div id="study-timer">00:00:00</div>
+
+<!-- Progress Bar -->
+<div style="width:100%; background:#eee; border-radius:10px; overflow:hidden; height:10px; margin:10px 0;">
+    <div id="progress-bar" style="width:0%; height:100%; background:#28a745;"></div>
+</div>
+            
+            <div>
+                <button onclick="startTimer()" id="startBtn" class="timer-btn" style="background:#28a745;">ጀምር</button>
+                <button onclick="stopTimer()" class="timer-btn" style="background:#ffa502;">አቁም</button>
+                <button onclick="resetTimer()" class="timer-btn" style="background:#ff4757;">መጀመሪያ</button>
+            </div>
+            <span id="timer-status" style="font-size: 12px; color: #666; display: block; margin-top: 10px;">ጥናትህን ጀምር!</span>
+
+            <hr style="margin:20px 0; opacity: 0.1;">
+            <div class="days-count">
+                <span id="days-number">1</span>
+                <p style="margin:0; font-size:10px;">ኛ ቀን</p>
+            </div>
+            <p id="study-msg" style="font-size: 13px; color: #666;">በርታ! እውቀት ብርሃን ነው!</p>
+        </div>
+        <div class="motivation-card">
+            <h3 style="margin-top:0;">💡</h3>
+            <p id="quote">"ትምህርት ለዓለም መለወጫ የምንጠቀምበት ትልቁ መሣሪያ ነው!"</p>
+            <small>- ኔልሰን ማንዴላ</small>
+        </div>
+        <div class="stats-grid">
+            <div class="stat-item"><span class="stat-num">120+</span><p>ማስታወሻዎች</p></div>
+            <div class="stat-item"><span class="stat-num">50+</span><p>ፈተናዎች</p></div>
+            <div class="stat-item"><span class="stat-num">15+</span><p>ትምህርቶች</p></div>
+        </div>
+    </div>
+   <footer style="background: #1a2a6c; color: white; text-align: center; padding: 30px; margin-top: 50px;">
+    <p style="margin: 0;">© 2026 Z-Notes | እውቀት ብርሃን ነው!</p>
+</footer>
+  <script>
+    function updateClock() {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('nav-time').textContent = `${h}:${m}:${s}`;
+        const options = { month: 'short', day: 'numeric' };
+        document.getElementById('nav-date').textContent = now.toLocaleDateString('am-ET', options);
+    }
+    setInterval(updateClock, 1000);
+
+    let timer;
+    let alarmSound = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
+    
+    let startTime = localStorage.getItem('startTime') ? parseInt(localStorage.getItem('startTime')) : null;
+    let totalSeconds = localStorage.getItem('totalSeconds') ? parseInt(localStorage.getItem('totalSeconds')) : 0;
+    let initialSeconds = localStorage.getItem('initialSeconds') ? parseInt(localStorage.getItem('initialSeconds')) : 0;
+    let isRunning = localStorage.getItem('isRunning') === 'true';
+    let isCountdown = localStorage.getItem('isCountdown') === 'true';
+
+    function getCurrentSeconds() {
+        if (!startTime) return totalSeconds;
+        let now = new Date().getTime();
+        let diff = Math.floor((now - startTime) / 1000);
+        let res = isCountdown ? totalSeconds - diff : totalSeconds + diff;
+        return res < 0 ? 0 : res;
+    }
+
+    function display(sec) {
+        sec = sec < 0 ? 0 : sec;
+        let hrs = Math.floor(sec / 3600);
+        let mins = Math.floor((sec % 3600) / 60);
+        let secs = sec % 60;
+        document.getElementById('study-timer').textContent = 
+            `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function updateProgress(sec) {
+        if (!isCountdown || initialSeconds === 0) return;
+        let percent = ((initialSeconds - sec) / initialSeconds) * 100;
+        document.getElementById('progress-bar').style.width = Math.min(percent, 100) + "%";
+    }
+
+    function startTimer() {
+        if (isRunning) return;
+        isRunning = true;
+        startTime = new Date().getTime();
+        saveTimer();
+        document.getElementById('startBtn').disabled = true;
+        runTimerLoop();
+    }
+
+    function runTimerLoop() {
+        clearInterval(timer);
+        timer = setInterval(() => {
+            let seconds = getCurrentSeconds();
+            if (isCountdown && seconds <= 0) {
+                finishTimer();
+                return;
+            }
+            display(seconds);
+            updateProgress(seconds);
+        }, 1000);
+    }
+
+    function stopTimer() {
+        clearInterval(timer);
+        totalSeconds = getCurrentSeconds();
+        isRunning = false;
+        startTime = null;
+        saveTimer();
+        document.getElementById('startBtn').disabled = false;
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        totalSeconds = 0; 
+        initialSeconds = 0; 
+        isCountdown = false;
+        startTime = null;
+        isRunning = false;
+        // localStorage.clear() አትጠቀም! ዳታ ያጠፋል።
+        localStorage.removeItem('startTime');
+        saveTimer();
+        display(0);
+        document.getElementById('progress-bar').style.width = "0%";
+        document.getElementById('startBtn').disabled = false;
+    }
+
+    function setCountdown() {
+        let mins = document.getElementById('setMinutes').value;
+        if (mins > 0) {
+            resetTimer();
+            totalSeconds = parseInt(mins) * 60;
+            initialSeconds = totalSeconds;
+            isCountdown = true;
+            display(totalSeconds);
+            saveTimer();
+            alert(mins + " ደቂቃ ተሞልቷል። 'ጀምር' የሚለውን ይጫኑ።");
+        }
+    }
+
+    function finishTimer() {
+        clearInterval(timer);
+        let finalName = localStorage.getItem('studentName') || "ተማሪ";
+        isRunning = false; 
+        startTime = null;
+        saveTimer();
+        display(0);
+        document.getElementById('startBtn').disabled = false;
+        alarmSound.play().catch(() => {});
+        if (Notification.permission === "granted") {
+            new Notification("Z-Notes: ጊዜው አልቋል! 🔔");
+        }
+        alert("ሰዓቱ አልቋል " + finalName + "! 🔔");
+    }
+
+    function saveTimer() {
+        localStorage.setItem('totalSeconds', totalSeconds);
+        localStorage.setItem('initialSeconds', initialSeconds);
+        localStorage.setItem('isRunning', isRunning);
+        localStorage.setItem('isCountdown', isCountdown);
+        localStorage.setItem('startTime', startTime || "");
+    }
+
+    function toggleDarkMode() {
+        const isDark = document.body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    function toggleProfileMenu(event) {
+        event.stopPropagation();
+        let menu = document.getElementById('profileMenu');
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.closest('.profile-container')) {
+            document.getElementById('profileMenu').style.display = 'none';
+        }
+    };
+
+    function handleLogout() {
+        if(confirm("መውጣት ትፈልጋለህ?")) {
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = "index.html";
+        }
+    }
+
+    window.addEventListener('load', () => {
+        if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
+        
+        const name = localStorage.getItem('studentName');
+        if (name) {
+            document.getElementById('welcomeText').textContent = `ሰላም ${name}! 👋`;
+            document.getElementById('profileName').textContent = name;
+        }
+
+        if (isRunning && startTime) {
+            runTimerLoop();
+            document.getElementById('startBtn').disabled = true;
+        } else {
+            display(totalSeconds);
+        }
+
+        let signupDate = localStorage.getItem('signupDate');
+        if (!signupDate) {
+            signupDate = new Date().getTime();
+            localStorage.setItem('signupDate', signupDate);
+        }
+        const diffInDays = Math.floor((new Date().getTime() - signupDate) / (1000 * 3600 * 24)) + 1;
+        document.getElementById('days-number').textContent = diffInDays;
+        
+        updateClock();
+    });
+</script>
+</body>
+</html>
