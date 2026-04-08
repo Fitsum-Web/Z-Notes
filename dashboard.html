@@ -408,7 +408,6 @@ div.dark-mode #profileMenu {
         isCountdown = false;
         startTime = null;
         isRunning = false;
-        // localStorage.clear() አትጠቀም! ዳታ ያጠፋል።
         localStorage.removeItem('startTime');
         saveTimer();
         display(0);
@@ -438,10 +437,17 @@ div.dark-mode #profileMenu {
         display(0);
         document.getElementById('startBtn').disabled = false;
         alarmSound.play().catch(() => {});
+		
+		const statusLabel = document.getElementById('timer-status');
+        statusLabel.innerHTML = `<b style="color: #ff4757;">🔔 ጊዜው አብቅቷል ${finalName}! እረፍት ይውሰዱ።</b>`;
+        statusLabel.style.fontSize = "16px";
+		
         if (Notification.permission === "granted") {
-            new Notification("Z-Notes: ጊዜው አልቋል! 🔔");
-        }
-        alert("ሰዓቱ አልቋል " + finalName + "! 🔔");
+        new Notification("Z-Notes: ጊዜው አልቋል! 🔔", {
+            body: `በርታ ${finalName}! የጥናት ጊዜህን አጠናቅቀሃል።`,
+            icon: "Logo2.png"
+        });
+    }
     }
 
     function saveTimer() {
@@ -476,7 +482,10 @@ div.dark-mode #profileMenu {
         }
     }
 
-    window.addEventListener('load', () => {
+    window.addEventListener('load', () => { 
+		if (Notification.permission !== "granted") {
+			Notification.requestPermission();
+}
         if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-mode');
         
         const name = localStorage.getItem('studentName');
