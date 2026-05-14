@@ -140,11 +140,34 @@
             margin-top: 50px;
         }
 
-        @media (max-width: 250px) {
-            .hero h1 { font-size: 35px; }
-            nav { padding: 10px 15px; }
-            nav ul { display: none; }
-        }
+@media (max-width: 600px) {
+    .login-container {
+        width: 90%; 
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    input[type="text"], input[type="password"], button {
+        width: 100%; 
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    .logo-img {
+        width: 120px; 
+        height: auto;
+    }
+
+    h1 {
+        font-size: 22px; 
+    }
+
+    body {
+        height: auto;
+        padding: 20px 0;
+        display: block; 
+    }
+}
     </style>
 </head>
 <body>
